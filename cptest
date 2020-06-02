@@ -46,9 +46,9 @@ def pubTempData(client, freq=10, limit=100):
 
         avail= os.popen("top -n1 |grep avail").readline()
         avail_mem =re.findall(r'\d+\.\d+',avail.rstrip())
-        can_use_memory=total- float(avail_mem[3]) #Total memory - avail memory // can_use_memory
+        use_memory=total- float(avail_mem[3]) #Total memory - avail memory //use_memory
 
-        row = "{:s}, {:s}, {:.1f}, {:s}, {:.1f}".format(ti.strftime("%Y-%m-%d %H:%M:%S.%f"),da, cpu_use , total_memory[0], can_use_memory) 
+        row = "{:s}, {:s}, {:.1f}, {:s}, {:.1f}".format(ti.strftime("%Y-%m-%d %H:%M:%S.%f"),da, cpu_use , total_memory[0], use_memory) 
         client.publish("cpu/temp",payload=row, qos=1)
         if i%freq == 0:
             print (i, row) #10second print
