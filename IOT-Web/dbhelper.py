@@ -86,7 +86,8 @@ class DBHelper:
             df_data['Temp'].append(float(stat[0]))
             df_data['CPU'].append(float(stat[1]))
             df_data['Mem'].append(float(stat[2]))
-            df_data['Use'].append(float(stat[3]))
+            use=float(stat[3])/float(stat[2])*100 #Memory Use %
+            df_data['Use'].append(use)
         
         statdf = pd.DataFrame(data=df_data)
         statdf = statdf.set_index('time')
